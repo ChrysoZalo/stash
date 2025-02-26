@@ -65,15 +65,15 @@ func (s *service) Health() map[string]string {
 	// Ping the database
 	err := s.db.PingContext(ctx)
 	if err != nil {
-		stats["status"] = "down"
-		stats["error"] = fmt.Sprintf("db down: %v", err)
-		log.Fatalf("db down: %v", err) // Log the error and terminate the program
+		stats["db_status"] = "down"
+		// stats["error"] = fmt.Sprintf("db down: %v", err)
+		log.Printf("db down: %v", err) // Log the error and terminate the program
 		return stats
 	}
 
 	// Database is up, add more statistics
-	stats["status"] = "up"
-	stats["message"] = "It's healthy"
+	stats["cd_status"] = "up"
+	// stats["message"] = "It's healthy"
 
 	// Get database stats (like open connections, in use, idle, etc.)
 	dbStats := s.db.Stats()
